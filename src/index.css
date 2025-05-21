@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  @apply relative inline-block w-12 h-6;
+}
+
+.toggle-switch input {
+  @apply opacity-0 w-0 h-0 absolute;
+}
+
+.toggle-switch .slider {
+  @apply absolute cursor-pointer inset-0 bg-gray-300 transition-all duration-200 rounded-full;
+}
+
+.toggle-switch .slider:before {
+  @apply absolute content-[''] h-5 w-5 left-0.5 bottom-0.5 bg-white transition-all duration-200 rounded-full shadow-sm;
+}
+
+.toggle-switch input:checked + .slider {
+  @apply bg-blue-600;
+}
+
+.toggle-switch input:focus + .slider {
+  @apply ring-2 ring-offset-2 ring-blue-500;
+}
+
+.toggle-switch input:checked + .slider:before {
+  @apply translate-x-6;
+}
+
+.toggle-switch input:disabled + .slider {
+  @apply opacity-50 cursor-not-allowed;
+}
