@@ -5,25 +5,25 @@ import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import TagInput from '../components/ui/TagInput';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
-import { getPostById, updatePost, getAllTags } from '../data/mockData';
+import { updatePost, getAllTags } from '../data/mockData';
 import { Tag } from '../types';
 
 const EditPost: FC = (): JSX.Element => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [description, setDescription] = useState('');
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [isPublished, setIsPublished] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect((): void => {
+    /*useEffect((): void => {
         if (id) {
             const post = getPostById(id);
             if (post) {
                 setTitle(post.title);
-                setContent(post.content);
+                setDescription(post.description);
                 setSelectedTags(post.tags);
                 setIsPublished(post.published);
             } else {
@@ -31,12 +31,12 @@ const EditPost: FC = (): JSX.Element => {
             }
             setIsLoading(false);
         }
-    }, [id, navigate]);
+    }, [id, navigate]);*/
 
     const handleSubmit = async (e: FormEvent): Promise<void> => {
         e.preventDefault();
 
-        if (!title.trim() || !content.trim() || !id) {
+        if (!title.trim() || !description.trim() || !id) {
             return;
         }
 
@@ -44,7 +44,7 @@ const EditPost: FC = (): JSX.Element => {
         try {
             const updatedPost = updatePost(id, {
                 title,
-                content,
+                description,
                 tags: selectedTags,
                 published: isPublished,
             });
@@ -149,8 +149,8 @@ const EditPost: FC = (): JSX.Element => {
                             <textarea
                                 className="w-full h-64 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Write your post content here..."
-                                value={content}
-                                onChange={(e) => setContent(e.target.value)}
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
                                 required
                                 disabled={isSubmitting}
                             />

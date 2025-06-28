@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus } from 'lucide-react';
-import { getAllPosts, deletePost } from '../data/mockData';
 import PostCard from '../components/posts/PostCard';
 import Button from '../components/ui/Button';
-import { PostFilters, Post } from '../types';
+import { Post } from '../types';
+import { deletePost, getAllPortfolio } from '../service/api';
 
 const Portfolio: React.FC = () => {
-    const [filters, setFilters] = useState<PostFilters>({});
+    const [isPortafolio, setPortfolio] = useState<Post[]>([]);
+    console.log('isPortafolio ', isPortafolio);
 
     const handleDeletePost = (id: string) => {
         if (
@@ -17,8 +18,7 @@ const Portfolio: React.FC = () => {
         ) {
             try {
                 deletePost(id);
-                // Force re-render by updating state
-                setFilters({ ...filters });
+                setPortfolio(isPortafolio.filter((post) => post._id !== id));
             } catch (error) {
                 console.error('Error deleting post:', error);
                 alert('Failed to delete post. Please try again.');
@@ -26,33 +26,19 @@ const Portfolio: React.FC = () => {
         }
     };
 
-    const filteredPosts = getAllPosts().filter((post) => {
-        // Filter by search term
-        if (
-            filters.search &&
-            !post.title.toLowerCase().includes(filters.search.toLowerCase())
-        ) {
-            return false;
-        }
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                // Simulate fetching posts from an API or data source
+                const posts = await getAllPortfolio();
+                setPortfolio(posts);
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
+        };
 
-        // Filter by published status
-        if (
-            filters.published !== undefined &&
-            post.published !== filters.published
-        ) {
-            return false;
-        }
-
-        // Filter by featured status
-        if (
-            filters.featured !== undefined &&
-            post.featured !== filters.featured
-        ) {
-            return false;
-        }
-
-        return true;
-    });
+        fetchPosts();
+    }, []);
 
     return (
         <div className="space-y-6">
@@ -70,23 +56,18 @@ const Portfolio: React.FC = () => {
                 </Link>
             </div>
 
-            {filteredPosts.length === 0 ? (
+            {isPortafolio.length === 0 ? (
                 <div className="bg-white rounded-lg shadow-sm p-8 text-center">
                     <h3 className="text-lg font-medium text-gray-900 mb-2">
                         No se encontró ningún portafolio
                     </h3>
-                    <Link to="/portfolio/new">
-                        <Button variant="primary" leftIcon={<Plus size={16} />}>
-                            Crear tu primera portafolio
-                        </Button>
-                    </Link>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredPosts.map(
+                    {isPortafolio.map(
                         (post: Post): JSX.Element => (
                             <PostCard
-                                key={post.id}
+                                key={post._id}
                                 post={post}
                                 onDelete={handleDeletePost}
                             />

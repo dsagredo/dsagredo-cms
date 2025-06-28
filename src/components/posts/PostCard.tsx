@@ -10,12 +10,13 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post, onDelete }): JSX.Element => {
+    console.log('PostCard', post);
     return (
         <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 hover:shadow-md transition-shadow">
             <div className="relative h-48 overflow-hidden">
                 <img
                     src={
-                        post.coverImage ||
+                        post.imagen ||
                         'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
                     }
                     alt={post.title}
@@ -29,29 +30,29 @@ const PostCard: React.FC<PostCardProps> = ({ post, onDelete }): JSX.Element => {
                 </h3>
 
                 <p className="text-sm text-gray-500 mb-2">
-                    {post.publishedAt
-                        ? `Published on ${format(
-                              new Date(post.publishedAt),
+                    {post.updatedAt
+                        ? `Publicado el ${format(
+                              new Date(post.updatedAt),
                               'MMM d, yyyy'
                           )}`
-                        : 'Not published yet'}
+                        : 'No publicado aún'}
                 </p>
 
                 <p className="text-sm text-gray-700 mb-3 line-clamp-2">
-                    {post.excerpt}
+                    {post.description}
                 </p>
 
                 <div className="flex justify-between items-center pt-3 border-t border-gray-100">
                     <div className="flex space-x-2">
                         <Link
-                            to={`/portfolio/${post.id}/edit`}
+                            to={`/portfolio/${post._id}/edit`}
                             className="text-gray-600 hover:text-gray-900 p-1 rounded-full hover:bg-gray-100"
                         >
                             <Edit className="h-4 w-4" />
                         </Link>
 
                         <button
-                            onClick={() => onDelete(post.id)}
+                            onClick={() => post._id && onDelete(post?._id)}
                             className="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-50"
                         >
                             <Trash2 className="h-4 w-4" />

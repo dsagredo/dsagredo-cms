@@ -5,15 +5,16 @@ import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import TagInput from '../components/ui/TagInput';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
-import { createPost, uploadMedia, getAllTags } from '../data/mockData';
+import { uploadMedia, getAllTags } from '../data/mockData';
+import { createPost } from '../service/api';
 import { Tag } from '../types';
 
 const NewPortfolio: React.FC = () => {
     const navigate = useNavigate();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [coverImage, setCoverImage] = useState('');
+    const [description, setDescription] = useState('');
+    const [isImage, setImage] = useState('');
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [demoLink, setDemoLink] = useState('');
     const [githubLink, setGithubLink] = useState('');
@@ -30,7 +31,7 @@ const NewPortfolio: React.FC = () => {
         setIsUploading(true);
         try {
             const uploadedMedia = await uploadMedia(file);
-            setCoverImage(uploadedMedia.url);
+            setImage(uploadedMedia.url);
         } catch (error) {
             console.error('Error uploading image:', error);
         } finally {
@@ -40,25 +41,28 @@ const NewPortfolio: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (!title.trim() || !content.trim()) {
+        if (!title.trim() || !description.trim()) {
             return;
         }
 
         setIsSubmitting(true);
         try {
-            const newPost = createPost(title, content, coverImage);
-            const updatedPost = {
-                ...newPost,
+            const body = {
+                title,
+                description,
+                imagen: isImage,
                 published: isPublished,
-                demoLink: demoLink || undefined,
-                githubLink: githubLink || undefined,
                 tags: selectedTags,
+                demo: demoLink,
+                github: githubLink,
+                updatedAt: new Date().toISOString(),
             };
-            console.log('Created post:', updatedPost);
-            navigate('/posts');
+            const resp = await createPost(body);
+            if (resp.id) {
+                navigate('/portfolio');
+            }
         } catch (error) {
-            console.error('Error creating post:', error);
+            console.error('Error creat ing post:', error);
         } finally {
             setIsSubmitting(false);
         }
@@ -78,7 +82,7 @@ const NewPortfolio: React.FC = () => {
                         className="bg-white"
                         variant="outline"
                         leftIcon={<X size={16} />}
-                        onClick={() => navigate('/posts')}
+                        onClick={() => navigate('/portfolio')}
                         disabled={isSubmitting}
                     >
                         Cancelar
@@ -166,24 +170,24 @@ const NewPortfolio: React.FC = () => {
                                     disabled={isUploading}
                                 />
 
-                                {coverImage ? (
+                                {isImage ? (
                                     <div className="relative">
                                         <img
-                                            src={coverImage}
+                                            src={isImage}
                                             alt="Cover"
-                                            className="w-full h-64 object-cover rounded-lg"
+                                            className="rounded-lg"
                                         />
                                         <Button
                                             variant="outline"
                                             size="sm"
-                                            className="absolute bottom-4 right-4"
+                                            className="absolute bg-white bottom-4 right-4"
                                             onClick={() =>
                                                 fileInputRef.current?.click()
                                             }
                                             disabled={isUploading}
                                             leftIcon={<Upload size={16} />}
                                         >
-                                            Change Image
+                                            Cambiar imagen
                                         </Button>
                                     </div>
                                 ) : (
@@ -231,9 +235,9 @@ const NewPortfolio: React.FC = () => {
                             </label>
                             <textarea
                                 className="w-full h-64 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                                value={content}
+                                value={description}
                                 onChange={(e): void =>
-                                    setContent(e.target.value)
+                                    setDescription(e.target.value)
                                 }
                                 required
                                 disabled={isSubmitting}
