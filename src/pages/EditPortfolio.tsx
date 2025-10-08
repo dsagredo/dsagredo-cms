@@ -18,6 +18,23 @@ const EditPost: FC = (): JSX.Element => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
+  const handleImageUpload = async (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setIsUploading(true);
+        try {
+            const uploadedMedia = await uploadMedia(file);
+            setCoverImage(uploadedMedia.url);
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
     useEffect((): void => {
         if (id) {
             const post = getPostById(id);
