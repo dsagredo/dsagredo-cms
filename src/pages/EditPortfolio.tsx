@@ -1,21 +1,24 @@
-import { useState, useEffect, FC, FormEvent } from 'react';
+import { useState, useEffect, useRef, FC, FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Save, X } from 'lucide-react';
+import { Save, X, Upload, ImageIcon } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import TagInput from '../components/ui/TagInput';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
-import { getPostById, updatePost, getAllTags } from '../data/mockData';
+import { getPostById, updatePost, getAllTags, uploadMedia } from '../data/mockData';
 import { Tag } from '../types';
 
 const EditPost: FC = (): JSX.Element => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [coverImage, setCoverImage] = useState('');
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [isPublished, setIsPublished] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect((): void => {
@@ -24,6 +27,7 @@ const EditPost: FC = (): JSX.Element => {
             if (post) {
                 setTitle(post.title);
                 setContent(post.content);
+                setCoverImage(post.coverImage || '');
                 setSelectedTags(post.tags);
                 setIsPublished(post.published);
             } else {
@@ -32,6 +36,21 @@ const EditPost: FC = (): JSX.Element => {
             setIsLoading(false);
         }
     }, [id, navigate]);
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setIsUploading(true);
+        try {
+            const media = await uploadMedia(file);
+            setCoverImage(media.url);
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        } finally {
+            setIsUploading(false);
+        }
+    };
 
     const handleSubmit = async (e: FormEvent): Promise<void> => {
         e.preventDefault();
@@ -45,6 +64,7 @@ const EditPost: FC = (): JSX.Element => {
             const updatedPost = updatePost(id, {
                 title,
                 content,
+                coverImage,
                 tags: selectedTags,
                 published: isPublished,
             });
@@ -154,6 +174,67 @@ const EditPost: FC = (): JSX.Element => {
                                 required
                                 disabled={isSubmitting}
                             />
+                        </div>
+
+                        <div>
+                            <div className="space-y-4">
+                                <label className="block text-sm font-medium text-slate-300 mb-1">
+                                    Subir una imagen
+                                </label>
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                    disabled={isUploading}
+                                />
+
+                                {coverImage ? (
+                                    <div className="relative">
+                                        <img
+                                            src={coverImage}
+                                            alt="Cover"
+                                            className="w-full h-64 object-cover rounded-lg"
+                                        />
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="absolute bottom-4 right-4"
+                                            onClick={() =>
+                                                fileInputRef.current?.click()
+                                            }
+                                            disabled={isUploading}
+                                            leftIcon={<Upload size={16} />}
+                                        >
+                                            Cambiar Imagen
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <div
+                                        className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-gray-400 transition-colors"
+                                        onClick={() =>
+                                            fileInputRef.current?.click()
+                                        }
+                                    >
+                                        <ImageIcon className="mx-auto h-12 w-12 text-gray-400" />
+                                        <div className="mt-4">
+                                            <Button
+                                                variant="outline"
+                                                disabled={isUploading}
+                                                leftIcon={<Upload size={16} />}
+                                            >
+                                                {isUploading
+                                                    ? 'Subiendo...'
+                                                    : 'Subir Imagen de Portada'}
+                                            </Button>
+                                        </div>
+                                        <p className="mt-2 text-sm text-slate-300">
+                                            PNG, JPG, GIF hasta 10MB
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
