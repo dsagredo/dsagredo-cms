@@ -157,6 +157,26 @@ const EditPost: FC = (): JSX.Element => {
                             disabled={isSubmitting}
                         />
 
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <Input
+                            label="Demo Link"
+                            placeholder="https://demo.example.com"
+                            value={demoLink}
+                            onChange={(e): void => setDemoLink(e.target.value)}
+                            fullWidth
+                            disabled={isSubmitting}
+                        />
+
+                            <Input
+                            label="GitHub Link"
+                            placeholder="https://github.com/username/repo"
+                            value={githubLink}
+                            onChange={(e): void => setGithubLink(e.target.value)}
+                            fullWidth
+                            disabled={isSubmitting}
+                        />
+                        </div>
+
                       <div>
                             <div className="space-y-4">
                                 <label className="block text-sm font-medium text-slate-300 mb-1">
@@ -243,24 +263,6 @@ const EditPost: FC = (): JSX.Element => {
                                 disabled={isSubmitting}
                             />
                         </div>
-
-                        <Input
-                            label="Demo Link"
-                            placeholder="https://demo.example.com"
-                            value={demoLink}
-                            onChange={(e): void => setDemoLink(e.target.value)}
-                            fullWidth
-                            disabled={isSubmitting}
-                        />
-
-                        <Input
-                            label="GitHub Link"
-                            placeholder="https://github.com/username/repo"
-                            value={githubLink}
-                            onChange={(e): void => setGithubLink(e.target.value)}
-                            fullWidth
-                            disabled={isSubmitting}
-                        />
                     </CardContent>
                 </Card>
             </div>
