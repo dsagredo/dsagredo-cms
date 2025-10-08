@@ -56,7 +56,6 @@ const NewPortfolio: React.FC = () => {
                 tags: selectedTags,
             };
             console.log('Created post:', updatedPost);
-            navigate('/posts');
         } catch (error) {
             console.error('Error creating post:', error);
         } finally {
