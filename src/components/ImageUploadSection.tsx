@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Upload, Image as ImageIcon } from 'lucide-react';
-import Button from '../ui/Button';
+import Button from './ui/Button';
 
 interface ImageUploadSectionProps {
     coverImage: string;

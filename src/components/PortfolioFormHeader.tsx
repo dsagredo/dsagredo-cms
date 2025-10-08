@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Save, X } from 'lucide-react';
-import Button from '../ui/Button';
+import Button from './ui/Button';
 
 interface PortfolioFormHeaderProps {
     title: string;

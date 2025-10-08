@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import Input from '../ui/Input';
-import TagInput from '../ui/TagInput';
+import Input from './ui/Input';
+import TagInput from './ui/TagInput';
 import ImageUploadSection from './ImageUploadSection';
-import { Tag } from '../../types';
+import { Tag } from '../types';
 
 interface PortfolioFormFieldsProps {
     title: string;

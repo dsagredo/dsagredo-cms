@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
-import PortfolioFormHeader from '../components/portfolio/PortfolioFormHeader';
-import PortfolioFormFields from '../components/portfolio/PortfolioFormFields';
+import PortfolioFormHeader from '../components/PortfolioFormHeader';
+import PortfolioFormFields from '../components/PortfolioFormFields';
 import { usePortfolioForm } from '../hooks/usePortfolioForm';
 import { useImageUpload } from '../hooks/useImageUpload';
 import { createPost, getAllTags } from '../data/mockData';
