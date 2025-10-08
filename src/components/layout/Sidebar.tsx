@@ -77,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }): JSX.Element => {
             <div className="px-3 py-4 border-t border-gray-200">
                 <button
                     onClick={handleSignOut}
-                    className="flex items-center px-4 py-3 text-sm font-medium text-gray-700 rounded-md w-full hover:bg-gray-100"
+                    className="flex items-center px-4 py-3 text-sm font-medium text-white rounded-md w-full"
                 >
                     <LogOut size={20} className="mr-3" />
                     Cerrar sesión
