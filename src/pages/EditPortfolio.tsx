@@ -21,7 +21,7 @@ const EditPost: FC = (): JSX.Element => {
     const [isUploading, setIsUploading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect((): void => {
+  {/*useEffect((): void => {
         if (id) {
             const post = getPostById(id);
             if (post) {
@@ -35,7 +35,7 @@ const EditPost: FC = (): JSX.Element => {
             }
             setIsLoading(false);
         }
-    }, [id, navigate]);
+    }, [id, navigate]);*/}
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
         const file = e.target.files?.[0];
