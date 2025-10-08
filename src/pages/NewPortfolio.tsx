@@ -154,7 +154,7 @@ const NewPortfolio: React.FC = () => {
 
                         <div>
                             <div className="space-y-4">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-slate-300 mb-1">
                                     Subir una imagen
                                 </label>
                                 <input
