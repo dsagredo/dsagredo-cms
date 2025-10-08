@@ -47,7 +47,7 @@ const EditPost: FC = (): JSX.Element => {
                 setSelectedTags(post.tags);
                 setIsPublished(post.published);
             } else {
-                navigate('/portfolio');
+                navigate('www.google.cl');
             }
             setIsLoading(false);
         }
