@@ -62,6 +62,7 @@ const EditPost: FC = (): JSX.Element => {
             const updatedPost = updatePost(id, {
                 title,
                 content,
+              published: isPublished,
                 tags: selectedTags,
                 published: isPublished,
             });
