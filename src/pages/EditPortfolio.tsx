@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, FormEvent } from 'react';
+import { useState, useEffect, FC, FormEvent, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Save, X } from 'lucide-react';
 import Button from '../components/ui/Button';
@@ -9,6 +9,7 @@ import { getPostById, updatePost, getAllTags } from '../data/mockData';
 import { Tag } from '../types';
 
 const EditPost: FC = (): JSX.Element => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const [title, setTitle] = useState('');
