@@ -5,7 +5,7 @@ import MainLayout from './components/layout/MainLayout';
 
 // Pages
 import Login from './pages/Login';
-import Portfolio from './pages/Portfolio';
+import Home from './pages/Home';
 import NewPortfolio from './pages/NewPortfolio';
 import EditPortfolio from './pages/EditPortfolio';
 
@@ -18,11 +18,7 @@ const App = (): JSX.Element => {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<MainLayout />}>
-                    <Route
-                        index
-                        element={<Navigate to="/portfolio" replace />}
-                    />
-                    <Route path="portfolio" element={<Portfolio />} />
+                    <Route path="portfolio" element={<Home />} />
                     <Route path="portfolio/new" element={<NewPortfolio />} />
                     <Route
                         path="portfolio/:id/edit"
