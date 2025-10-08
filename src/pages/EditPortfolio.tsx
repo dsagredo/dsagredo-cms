@@ -100,8 +100,8 @@ const EditPost: FC = (): JSX.Element => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <label className="text-sm font-medium text-gray-700">
-                                Status
+                            <label className="text-sm font-medium text-slate-300">
+                                Estado
                             </label>
                             <div className="flex items-center space-x-2">
                                 <label className="toggle-switch">
