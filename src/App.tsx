@@ -18,7 +18,7 @@ const App = (): JSX.Element => {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<MainLayout />}>
-                    <Route path="portfolio" element={<Home />} />
+                    <Route path="home" element={<Home />} />
                     <Route path="portfolio/new" element={<NewPortfolio />} />
                     <Route
                         path="portfolio/:id/edit"
