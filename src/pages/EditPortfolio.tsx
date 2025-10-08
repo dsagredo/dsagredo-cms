@@ -17,6 +17,7 @@ const EditPost: FC = (): JSX.Element => {
     const [isPublished, setIsPublished] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isUploading, setIsUploading] = useState(false);
 
   const handleImageUpload = async (
         e: React.ChangeEvent<HTMLInputElement>
