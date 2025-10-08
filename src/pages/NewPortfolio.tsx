@@ -205,7 +205,7 @@ const NewPortfolio: React.FC = () => {
                                                     : 'Upload Cover Image'}
                                             </Button>
                                         </div>
-                                        <p className="mt-2 text-sm text-gray-500">
+                                        <p className="mt-2 text-sm text-slate-300">
                                             PNG, JPG, GIF up to 10MB
                                         </p>
                                     </div>
