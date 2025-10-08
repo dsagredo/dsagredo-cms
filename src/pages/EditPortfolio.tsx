@@ -24,7 +24,8 @@ const EditPost: FC = (): JSX.Element => {
   const handleImageUpload = async (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
-        const file = e.target.files?.[0];
+    console.log("rprueba");    
+    /*const file = e.target.files?.[0];
         if (!file) return;
 
         setIsUploading(true);
@@ -35,7 +36,7 @@ const EditPost: FC = (): JSX.Element => {
             console.error('Error uploading image:', error);
         } finally {
             setIsUploading(false);
-        }
+        }*/
     };
 
     useEffect((): void => {
