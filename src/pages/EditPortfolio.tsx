@@ -56,8 +56,8 @@ const EditPost: FC = (): JSX.Element => {
 
     const handleSubmit = async (e: FormEvent): Promise<void> => {
         e.preventDefault();
-
-        if (!title.trim() || !content.trim() || !id) {
+  console.log("erorr");
+        /*if (!title.trim() || !content.trim() || !id) {
             return;
         }
 
@@ -76,7 +76,7 @@ const EditPost: FC = (): JSX.Element => {
             console.error('Error updating post:', error);
         } finally {
             setIsSubmitting(false);
-        }
+        }*/
     };
 
     if (isLoading) {
