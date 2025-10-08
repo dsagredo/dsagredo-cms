@@ -15,6 +15,8 @@ const EditPost: FC = (): JSX.Element => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
   const [coverImage, setCoverImage] = useState('');
+    const [demoLink, setDemoLink] = useState('');
+    const [githubLink, setGithubLink] = useState('');
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [isPublished, setIsPublished] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,6 +47,8 @@ const EditPost: FC = (): JSX.Element => {
                 setTitle(post.title);
                 setContent(post.content);
                 setCoverImage(post.coverImage || '');
+                setDemoLink(post.demoLink || '');
+                setGithubLink(post.githubLink || '');
                 setSelectedTags(post.tags);
                 setIsPublished(post.published);
             } else {
@@ -66,6 +70,8 @@ const EditPost: FC = (): JSX.Element => {
                 title,
                 content,
                 coverImage,
+                demoLink,
+                githubLink,
                 tags: selectedTags,
                 published: isPublished,
             });
@@ -237,6 +243,24 @@ const EditPost: FC = (): JSX.Element => {
                                 disabled={isSubmitting}
                             />
                         </div>
+
+                        <Input
+                            label="Demo Link"
+                            placeholder="https://demo.example.com"
+                            value={demoLink}
+                            onChange={(e): void => setDemoLink(e.target.value)}
+                            fullWidth
+                            disabled={isSubmitting}
+                        />
+
+                        <Input
+                            label="GitHub Link"
+                            placeholder="https://github.com/username/repo"
+                            value={githubLink}
+                            onChange={(e): void => setGithubLink(e.target.value)}
+                            fullWidth
+                            disabled={isSubmitting}
+                        />
                     </CardContent>
                 </Card>
             </div>
