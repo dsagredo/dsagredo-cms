@@ -8,7 +8,7 @@ import { PostFilters, Post } from '../types';
 import { filterPosts } from '../utils/postFilters';
 import { MESSAGES } from '../constants/messages';
 
-const Portfolio: FC = () => {
+const Home: FC = () => {
     const [filters, setFilters] = useState<PostFilters>({});
 
     const handleDeletePost = (id: string) => {
@@ -85,4 +85,4 @@ const Portfolio: FC = () => {
     );
 };
 
-export default Portfolio;
+export default Home;
