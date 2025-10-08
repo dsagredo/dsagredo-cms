@@ -97,7 +97,7 @@ const NewPortfolio: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
                 <Card>
                     <CardHeader>
-                        <h2 className="text-lg font-semibold text-gray-900">
+                        <h2 className="text-lg font-semibold text-white">
                             Detalle
                         </h2>
                     </CardHeader>
