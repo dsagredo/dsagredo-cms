@@ -57,14 +57,14 @@ const generatePost = (
 };
 
 export let posts: Post[] = [
-  generatePost('1', 'Building Modern UIs with React', undefined, '', true, true, 2),
-  generatePost('2', 'TypeScript Best Practices', undefined, '', true, false, 5),
-  generatePost('3', 'CSS Grid Layout Guide', undefined, '', true, false, 8),
-  generatePost('4', 'JavaScript Fundamentals', undefined, '', true, false, 12),
-  generatePost('5', 'Responsive Design Strategies', undefined, '', true, true, 15),
-  generatePost('6', 'Getting Started with TailwindCSS', undefined, '', true, false, 20),
-  generatePost('7', 'Advanced React Hooks', undefined, '', false, false, 0),
-  generatePost('8', 'Web Performance Optimization', undefined, '', false, false, 0)
+  generatePost('1', 'Building Modern UIs with React', undefined, 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', true, true, 2),
+  generatePost('2', 'TypeScript Best Practices', undefined, 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', true, false, 5),
+  generatePost('3', 'CSS Grid Layout Guide', undefined, 'https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', true, false, 8),
+  generatePost('4', 'JavaScript Fundamentals', undefined, 'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', true, false, 12),
+  generatePost('5', 'Responsive Design Strategies', undefined, 'https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', true, true, 15),
+  generatePost('6', 'Getting Started with TailwindCSS', undefined, 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', true, false, 20),
+  generatePost('7', 'Advanced React Hooks', undefined, 'https://images.pexels.com/photos/2740956/pexels-photo-2740956.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', false, false, 0),
+  generatePost('8', 'Web Performance Optimization', undefined, 'https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', false, false, 0)
 ];
 
 export let media: Media[] = [
