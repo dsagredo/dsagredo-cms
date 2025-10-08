@@ -24,8 +24,7 @@ const EditPost: FC = (): JSX.Element => {
   const handleImageUpload = async (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
-    console.log("rprueba");    
-    /*const file = e.target.files?.[0];
+    const file = e.target.files?.[0];
         if (!file) return;
 
         setIsUploading(true);
@@ -36,7 +35,7 @@ const EditPost: FC = (): JSX.Element => {
             console.error('Error uploading image:', error);
         } finally {
             setIsUploading(false);
-        }*/
+        }
     };
 
     useEffect((): void => {
@@ -56,8 +55,7 @@ const EditPost: FC = (): JSX.Element => {
 
     const handleSubmit = async (e: FormEvent): Promise<void> => {
         e.preventDefault();
-  console.log("erorr");
-        /*if (!title.trim() || !content.trim() || !id) {
+  if (!title.trim() || !content.trim() || !id) {
             return;
         }
 
@@ -71,12 +69,11 @@ const EditPost: FC = (): JSX.Element => {
                 published: isPublished,
             });
             console.log('Updated post:', updatedPost);
-            navigate('/posts');
         } catch (error) {
             console.error('Error updating post:', error);
         } finally {
             setIsSubmitting(false);
-        }*/
+        }
     };
 
     if (isLoading) {
