@@ -93,7 +93,7 @@ const NewPortfolio: React.FC = () => {
                 </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-6">
                 <Card>
                     <CardHeader>
                         <h2 className="text-lg font-semibold text-white">
@@ -240,7 +240,7 @@ const NewPortfolio: React.FC = () => {
                         </div>
                     </CardContent>
                 </Card>
-            </form>
+            </div>
         </div>
     );
 };
