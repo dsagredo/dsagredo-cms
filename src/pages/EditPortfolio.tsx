@@ -149,7 +149,6 @@ const EditPost: FC = (): JSX.Element => {
                         </div>
                         <Input
                             label="Titulo"
-                            placeholder="Enter post title"
                             value={title}
                             onChange={(e): void => setTitle(e.target.value)}
                             fullWidth
