@@ -1,58 +1,29 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import { getAllPosts, deletePost } from '../data/mockData';
 import PostCard from '../components/posts/PostCard';
 import Button from '../components/ui/Button';
 import { PostFilters, Post } from '../types';
+import { filterPosts } from '../utils/postFilters';
+import { MESSAGES } from '../constants/messages';
 
-const Portfolio: React.FC = () => {
+const Portfolio: FC = () => {
     const [filters, setFilters] = useState<PostFilters>({});
 
     const handleDeletePost = (id: string) => {
-        if (
-            window.confirm(
-                'Are you sure you want to delete this post? This action cannot be undone.'
-            )
-        ) {
+        if (window.confirm(MESSAGES.DELETE_CONFIRMATION)) {
             try {
                 deletePost(id);
-                // Force re-render by updating state
                 setFilters({ ...filters });
             } catch (error) {
                 console.error('Error deleting post:', error);
-                alert('Failed to delete post. Please try again.');
+                alert(MESSAGES.DELETE_ERROR);
             }
         }
     };
 
-    const filteredPosts = getAllPosts().filter((post) => {
-        // Filter by search term
-        if (
-            filters.search &&
-            !post.title.toLowerCase().includes(filters.search.toLowerCase())
-        ) {
-            return false;
-        }
-
-        // Filter by published status
-        if (
-            filters.published !== undefined &&
-            post.published !== filters.published
-        ) {
-            return false;
-        }
-
-        // Filter by featured status
-        if (
-            filters.featured !== undefined &&
-            post.featured !== filters.featured
-        ) {
-            return false;
-        }
-
-        return true;
-    });
+    const filteredPosts = filterPosts(getAllPosts(), filters);
 
     return (
         <div className="space-y-8 animate-fade-in">
@@ -79,14 +50,14 @@ const Portfolio: React.FC = () => {
                         <Plus size={32} className="text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-white mb-2">
-                        No se encontró ningún portafolio
+                        {MESSAGES.NO_POSTS_FOUND}
                     </h3>
                     <p className="text-slate-400 mb-6">
-                        Comienza creando tu primera pieza de contenido
+                        {MESSAGES.CREATE_FIRST_POST}
                     </p>
                     <Link to="/portfolio/new">
                         <Button variant="primary" leftIcon={<Plus size={16} />}>
-                            Crear tu primera portafolio
+                            {MESSAGES.CREATE_FIRST_PORTFOLIO}
                         </Button>
                     </Link>
                 </div>
