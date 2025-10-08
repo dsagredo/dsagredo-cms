@@ -5,7 +5,7 @@ import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import TagInput from '../components/ui/TagInput';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
-import { getPostById, updatePost, getAllTags } from '../data/mockData';
+import { getPostById, updatePost, getAllTags, uploadMedia } from '../data/mockData';
 import { Tag } from '../types';
 
 const EditPost: FC = (): JSX.Element => {
@@ -44,10 +44,11 @@ const EditPost: FC = (): JSX.Element => {
             if (post) {
                 setTitle(post.title);
                 setContent(post.content);
+                setCoverImage(post.coverImage || '');
                 setSelectedTags(post.tags);
                 setIsPublished(post.published);
             } else {
-                navigate('www.google.cl');
+                navigate('/portfolio');
             }
             setIsLoading(false);
         }
@@ -64,11 +65,12 @@ const EditPost: FC = (): JSX.Element => {
             const updatedPost = updatePost(id, {
                 title,
                 content,
-              published: isPublished,
+                coverImage,
                 tags: selectedTags,
                 published: isPublished,
             });
             console.log('Updated post:', updatedPost);
+            navigate('/portfolio');
         } catch (error) {
             console.error('Error updating post:', error);
         } finally {
