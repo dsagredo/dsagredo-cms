@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose }): JSX.Element => {
     };
 
     return (
-        <div className="h-full bg-slate-700 border-r border-gray-200 flex flex-col">
+        <div className="h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border-r border-gray-200 flex flex-col">
             <div className="px-6 py-6 border-b border-gray-200 flex items-center justify-between">
                 <div>
                     <h1 className="text-xl font-bold text-gray-900">
