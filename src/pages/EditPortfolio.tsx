@@ -1,6 +1,6 @@
 import { useState, useEffect, FC, FormEvent, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Save, X } from 'lucide-react';
+import { Save, X, Upload, Image as ImageIcon } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import TagInput from '../components/ui/TagInput';
