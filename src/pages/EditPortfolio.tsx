@@ -114,13 +114,13 @@ const EditPost: FC = (): JSX.Element => {
             <form onSubmit={handleSubmit} className="space-y-6">
                 <Card>
                     <CardHeader>
-                        <h2 className="text-lg font-semibold text-gray-900">
+                        <h2 className="text-lg font-semibold text-white">
                             Detalle
                         </h2>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium text-slate-300">
                                 Estado
                             </label>
                             <div className="flex items-center space-x-2">
