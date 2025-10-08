@@ -14,6 +14,7 @@ const EditPost: FC = (): JSX.Element => {
     const { id } = useParams<{ id: string }>();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+  const [coverImage, setCoverImage] = useState('');
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [isPublished, setIsPublished] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
