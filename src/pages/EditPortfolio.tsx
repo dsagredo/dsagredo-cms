@@ -69,7 +69,7 @@ const EditPost: FC = (): JSX.Element => {
                 published: isPublished,
             });
             console.log('Updated post:', updatedPost);
-            navigate('/portfolio');
+            navigate('/posts');
         } catch (error) {
             console.error('Error updating post:', error);
         } finally {
