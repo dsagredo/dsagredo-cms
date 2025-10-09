@@ -3,11 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForms } from '../hooks/useForms';
 import { useImageUpload } from '../hooks/useImageUpload';
 import { getPostById, updatePost, getAllTags } from '../data/mockData';
-import Button from '../components/button';
+import Button from '../components/Button';
 import { Save, X } from 'lucide-react';
-import Tags from '../components/tags';
-import Input from '../components/input';
-import UploadImage from '../components/uploadImage';
+import Tags from '../components/Tags';
+import Input from '../components/Input';
+import UploadImage from '../components/UploadImage';
 
 const Edit: FC = (): JSX.Element => {
     const navigate = useNavigate();

@@ -1,13 +1,13 @@
 import { ChangeEvent, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Save, X } from 'lucide-react';
-import Button from '../components/button';
+import Button from '../components/Button';
 import { useForms } from '../hooks/useForms';
 import { useImageUpload } from '../hooks/useImageUpload';
 import { createPost, getAllTags } from '../data/mockData';
-import Input from '../components/input';
-import UploadImage from '../components/uploadImage';
-import Tags from '../components/tags';
+import Input from '../components/Input';
+import UploadImage from '../components/UploadImage';
+import Tags from '../components/Tags';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();

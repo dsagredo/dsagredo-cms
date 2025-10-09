@@ -1,8 +1,8 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn } from 'lucide-react';
-import Button from '../components/button';
-import Input from '../components/input';
+import Button from '../components/Button';
+import Input from '../components/Input';
 
 const Login: FC = (): JSX.Element => {
     const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Upload, Image as ImageIcon } from 'lucide-react';
-import Button from './button';
+import Button from './Button';
 
 interface UploadImageT {
     coverImage: string;
