@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-ms';
+const API_ADD_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-add-ms';
 
 export interface PortfolioProject {
   _id: string;
@@ -18,6 +19,20 @@ export interface PortfolioProject {
   updatedAt: string;
 }
 
+export interface CreatePortfolioProject {
+  title: string;
+  description: string;
+  imagen: string;
+  published: boolean;
+  tags: {
+    id: string;
+    name: string;
+    slug: string;
+  }[];
+  demo: string;
+  github: string;
+}
+
 const portfolioApi = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -32,6 +47,15 @@ export const getPortfolioProjects = async (): Promise<PortfolioProject[]> => {
 
 export const getPortfolioProjectById = async (id: string): Promise<PortfolioProject> => {
   const response = await portfolioApi.get<PortfolioProject>(`/${id}`);
+  return response.data;
+};
+
+export const createPortfolioProject = async (project: CreatePortfolioProject): Promise<PortfolioProject> => {
+  const response = await axios.post<PortfolioProject>(API_ADD_URL, project, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return response.data;
 };
 
