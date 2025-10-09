@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_BASE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-ms';
 const API_ADD_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-add-ms';
-const API_UPDATE_URL = 'https://dsagredo-ms-production.up.railway.app//portfolio-edit-ms'
+const API_UPDATE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-edit-ms'
 
 export interface PortfolioProject {
   _id: string;
