@@ -62,7 +62,7 @@ const Edit: FC = (): JSX.Element => {
             }
         };
         loadProject();
-    }, [id, navigate, setFormData]);
+    }, [navigate, setFormData]);
 
     const handleSubmit = async (): Promise<void> => {
         if (!title.trim() || !content.trim() || !id) {
