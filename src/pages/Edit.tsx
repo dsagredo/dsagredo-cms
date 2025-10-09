@@ -62,7 +62,6 @@ const Edit: FC = (): JSX.Element => {
             }
         };
         loadProject();
-      console.log("easdsada");
     }, [navigate]);
 
     const handleSubmit = async (): Promise<void> => {
