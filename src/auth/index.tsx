@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-interface AuthGuardProps {
-    children: React.ReactNode;
+interface AuthT {
+    children: ReactNode;
 }
 
-const AuthGuard: React.FC<AuthGuardProps> = ({ children }): JSX.Element => {
+const Auth: FC<AuthT> = ({ children }: AuthT): JSX.Element => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -16,11 +16,11 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }): JSX.Element => {
         if (!isAuthenticated && location.pathname !== '/login') {
             navigate('/login');
         } else if (isAuthenticated && location.pathname === '/login') {
-            navigate('/portfolio');
+            navigate('/home');
         }
     }, [navigate, location]);
 
     return <>{children}</>;
 };
 
-export default AuthGuard;
+export default Auth;

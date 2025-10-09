@@ -1,17 +1,18 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Plus } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { LogOut, Plus } from 'lucide-react';
 import { getAllPosts, deletePost } from '../data/mockData';
-import PostCard from '../components/posts/PostCard';
-import Button from '../components/ui/Button';
+import Card from '../components/card';
+import Button from '../components/button';
 import { PostFilters, Post } from '../types';
 import { filterPosts } from '../utils/postFilters';
 import { MESSAGES } from '../constants/messages';
 
-const Home: FC = () => {
+const Home: FC = (): JSX.Element => {
     const [filters, setFilters] = useState<PostFilters>({});
+    const navigate = useNavigate();
 
-    const handleDeletePost = (id: string) => {
+    const handleDeletePost = (id: string): void => {
         if (window.confirm(MESSAGES.DELETE_CONFIRMATION)) {
             try {
                 deletePost(id);
@@ -25,6 +26,12 @@ const Home: FC = () => {
 
     const filteredPosts = filterPosts(getAllPosts(), filters);
 
+    const handleSignOut = (): void => {
+        localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('user');
+        navigate('/login');
+    };
+
     return (
         <div className="space-y-8 animate-fade-in">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
@@ -36,12 +43,21 @@ const Home: FC = () => {
                         Gestiona tu contenido creativo
                     </p>
                 </div>
-
-                <Link to="/portfolio/new" className="animate-slide-up">
-                    <Button variant="primary" leftIcon={<Plus size={16} />}>
-                        Nueva
-                    </Button>
-                </Link>
+                <div className="flex">
+                    <Link to="/portfolio/new" className="animate-slide-up">
+                        <Button
+                            title="Nueva"
+                            variant="primary"
+                            leftIcon={<Plus size={16} />}
+                        />
+                    </Link>
+                    <button
+                        onClick={handleSignOut}
+                        className="text-sm font-medium text-white w-full"
+                    >
+                        <LogOut size={20} className="mr-3" />
+                    </button>
+                </div>
             </div>
 
             {filteredPosts.length === 0 ? (
@@ -72,10 +88,7 @@ const Home: FC = () => {
                                     animationDelay: `${index * 0.1}s`,
                                 }}
                             >
-                                <PostCard
-                                    post={post}
-                                    onDelete={handleDeletePost}
-                                />
+                                <Card data={post} onClick={handleDeletePost} />
                             </div>
                         )
                     )}

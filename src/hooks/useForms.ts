@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Tag } from '../types';
+import { TagsT } from '../types';
 
 export interface PortfolioFormData {
     title: string;
@@ -7,31 +7,25 @@ export interface PortfolioFormData {
     coverImage: string;
     demoLink: string;
     githubLink: string;
-    selectedTags: Tag[];
+    selectedTags: TagsT[];
     isPublished: boolean;
 }
 
-export const usePortfolioForm = (initialData?: Partial<PortfolioFormData>) => {
+export const useForms = (initialData?: Partial<PortfolioFormData>) => {
     const [title, setTitle] = useState(initialData?.title || '');
     const [content, setContent] = useState(initialData?.content || '');
     const [coverImage, setCoverImage] = useState(initialData?.coverImage || '');
     const [demoLink, setDemoLink] = useState(initialData?.demoLink || '');
     const [githubLink, setGithubLink] = useState(initialData?.githubLink || '');
-    const [selectedTags, setSelectedTags] = useState<Tag[]>(initialData?.selectedTags || []);
-    const [isPublished, setIsPublished] = useState(initialData?.isPublished || false);
+    const [selectedTags, setSelectedTags] = useState<TagsT[]>(
+        initialData?.selectedTags || []
+    );
+    const [isPublished, setIsPublished] = useState(
+        initialData?.isPublished || false
+    );
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const resetForm = () => {
-        setTitle('');
-        setContent('');
-        setCoverImage('');
-        setDemoLink('');
-        setGithubLink('');
-        setSelectedTags([]);
-        setIsPublished(false);
-    };
-
-    const setFormData = (data: Partial<PortfolioFormData>) => {
+    const setFormData = (data: Partial<PortfolioFormData>): void => {
         if (data.title !== undefined) setTitle(data.title);
         if (data.content !== undefined) setContent(data.content);
         if (data.coverImage !== undefined) setCoverImage(data.coverImage);
@@ -40,16 +34,6 @@ export const usePortfolioForm = (initialData?: Partial<PortfolioFormData>) => {
         if (data.selectedTags !== undefined) setSelectedTags(data.selectedTags);
         if (data.isPublished !== undefined) setIsPublished(data.isPublished);
     };
-
-    const getFormData = (): PortfolioFormData => ({
-        title,
-        content,
-        coverImage,
-        demoLink,
-        githubLink,
-        selectedTags,
-        isPublished,
-    });
 
     return {
         title,
@@ -68,8 +52,6 @@ export const usePortfolioForm = (initialData?: Partial<PortfolioFormData>) => {
         setIsPublished,
         isSubmitting,
         setIsSubmitting,
-        resetForm,
         setFormData,
-        getFormData,
     };
 };

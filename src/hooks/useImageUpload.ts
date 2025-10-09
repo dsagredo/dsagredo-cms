@@ -6,7 +6,9 @@ export const useImageUpload = (onUploadComplete?: (url: string) => void) => {
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageUpload = async (
+        e: React.ChangeEvent<HTMLInputElement>
+    ): Promise<void> => {
         const file = e.target.files?.[0];
         if (!file) return;
 
@@ -24,7 +26,7 @@ export const useImageUpload = (onUploadComplete?: (url: string) => void) => {
         }
     };
 
-    const triggerUpload = () => {
+    const triggerUpload = (): void => {
         fileInputRef.current?.click();
     };
 
