@@ -2,12 +2,13 @@ import { useState, useEffect, FC, ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForms } from '../hooks/useForms';
 import { useImageUpload } from '../hooks/useImageUpload';
-import { getPostById, updatePost, getAllTags } from '../data/mockData';
+import { getAllTags } from '../data/mockData';
 import Button from '../components/Button';
 import { Save, X } from 'lucide-react';
 import Tags from '../components/Tags';
 import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
+import { getPortfolioProjectById } from '../services/portfolioApi';
 
 const Edit: FC = (): JSX.Element => {
     const navigate = useNavigate();
@@ -38,21 +39,29 @@ const Edit: FC = (): JSX.Element => {
         useImageUpload((url: string): void => setCoverImage(url));
 
     useEffect((): void => {
-        if (id) {
-            const post = getPostById(id);
-            if (post) {
-                setFormData({
-                    title: post.title,
-                    content: post.content,
-                    coverImage: post.coverImage || '',
-                    demoLink: post.demoLink || '',
-                    githubLink: post.githubLink || '',
-                    selectedTags: post.tags,
-                    isPublished: post.published,
-                });
+        const loadProject = async (): Promise<void> => {
+            if (id) {
+                try {
+                    const project = await getPortfolioProjectById(id);
+                    if (project) {
+                        setFormData({
+                            title: project.title,
+                            content: project.description,
+                            coverImage: project.imagen || '',
+                            demoLink: project.demo || '',
+                            githubLink: project.github || '',
+                            selectedTags: project.tags,
+                            isPublished: project.published,
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error loading project:', error);
+                } finally {
+                    setIsLoading(false);
+                }
             }
-            setIsLoading(false);
-        }
+        };
+        loadProject();
     }, [id, navigate, setFormData]);
 
     const handleSubmit = async (): Promise<void> => {

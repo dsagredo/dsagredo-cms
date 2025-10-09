@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API_BASE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-ms';
 const API_ADD_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-add-ms';
-const API_ID_URL = 'https://dsagredo-ms-production.up.railway.app//portfolio-ms/:id';
 
 export interface PortfolioProject {
   _id: string;
@@ -47,7 +46,7 @@ export const getPortfolioProjects = async (): Promise<PortfolioProject[]> => {
 };
 
 export const getPortfolioProjectById = async (id: string): Promise<PortfolioProject> => {
-  const response = await portfolioApi.get<PortfolioProject>(`/${id}`);
+  const response = await axios.get<PortfolioProject>(`${API_BASE_URL}/${id}`);
   return response.data;
 };
 
