@@ -50,8 +50,6 @@ const Edit: FC = (): JSX.Element => {
                     selectedTags: post.tags,
                     isPublished: post.published,
                 });
-            } else {
-                navigate('/home');
             }
             setIsLoading(false);
         }
