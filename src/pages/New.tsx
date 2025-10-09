@@ -49,6 +49,7 @@ const New: FC = (): JSX.Element => {
                 tags: selectedTags,
             };
             console.log('Created post:', updatedPost);
+          createPortfolioProject
             navigate('/home');
         } catch (error) {
             console.error('Error creating post:', error);
