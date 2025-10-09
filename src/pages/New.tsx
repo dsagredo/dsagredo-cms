@@ -4,10 +4,11 @@ import { Save, X } from 'lucide-react';
 import Button from '../components/Button';
 import { useForms } from '../hooks/useForms';
 import { useImageUpload } from '../hooks/useImageUpload';
-import { createPost, getAllTags } from '../data/mockData';
+import { getAllTags } from '../data/mockData';
 import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
 import Tags from '../components/Tags';
+import { createPortfolioProject } from '../services/portfolioApi';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();
@@ -40,19 +41,22 @@ const New: FC = (): JSX.Element => {
 
         setIsSubmitting(true);
         try {
-            const newPost = createPost(title, content, coverImage);
-            const updatedPost = {
-                ...newPost,
+            const newProject = {
+                title,
+                description: content,
+                imagen: coverImage,
                 published: isPublished,
-                demoLink: demoLink || undefined,
-                githubLink: githubLink || undefined,
+                demo: demoLink,
+                github: githubLink,
                 tags: selectedTags,
             };
-            console.log('Created post:', updatedPost);
-          createPortfolioProject
+
+            const createdProject = await createPortfolioProject(newProject);
+            console.log('Created project:', createdProject);
             navigate('/home');
         } catch (error) {
-            console.error('Error creating post:', error);
+            console.error('Error creating project:', error);
+            alert('Error al crear el proyecto');
         } finally {
             setIsSubmitting(false);
         }
