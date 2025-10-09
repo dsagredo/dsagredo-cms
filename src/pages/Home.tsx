@@ -1,30 +1,41 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogOut, Plus } from 'lucide-react';
-import { getAllPosts, deletePost } from '../data/mockData';
 import Card from '../components/Card';
 import Button from '../components/Button';
-import { PostFilters, Post } from '../types';
-import { filterPosts } from '../utils/postFilters';
+import { Post } from '../types';
 import { MESSAGES } from '../constants/messages';
+import { getPortfolioProjects, PortfolioProject } from '../services/portfolioApi';
 
 const Home: FC = (): JSX.Element => {
-    const [filters, setFilters] = useState<PostFilters>({});
+    const [projects, setProjects] = useState<PortfolioProject[]>([]);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const data = await getPortfolioProjects();
+                setProjects(data);
+            } catch (error) {
+                console.error('Error fetching projects:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProjects();
+    }, []);
 
     const handleDeletePost = (id: string): void => {
         if (window.confirm(MESSAGES.DELETE_CONFIRMATION)) {
             try {
-                deletePost(id);
-                setFilters({ ...filters });
+                setProjects(projects.filter(p => p._id !== id));
             } catch (error) {
                 console.error('Error deleting post:', error);
                 alert(MESSAGES.DELETE_ERROR);
             }
         }
     };
-
-    const filteredPosts = filterPosts(getAllPosts(), filters);
 
     const handleSignOut = (): void => {
         localStorage.removeItem('isAuthenticated');
@@ -60,7 +71,11 @@ const Home: FC = (): JSX.Element => {
                 </div>
             </div>
 
-            {filteredPosts.length === 0 ? (
+            {loading ? (
+                <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-12 text-center animate-scale-in">
+                    <p className="text-slate-400">Cargando proyectos...</p>
+                </div>
+            ) : projects.length === 0 ? (
                 <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl p-12 text-center animate-scale-in">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
                         <Plus size={32} className="text-white" />
@@ -79,16 +94,16 @@ const Home: FC = (): JSX.Element => {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredPosts.map(
-                        (post: Post, index: number): JSX.Element => (
+                    {projects.map(
+                        (project: PortfolioProject, index: number): JSX.Element => (
                             <div
-                                key={post.id}
+                                key={project._id}
                                 className="animate-slide-up"
                                 style={{
                                     animationDelay: `${index * 0.1}s`,
                                 }}
                             >
-                                <Card data={post} onClick={handleDeletePost} />
+                                <Card data={project} onClick={handleDeletePost} />
                             </div>
                         )
                     )}
