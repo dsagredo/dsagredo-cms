@@ -59,4 +59,13 @@ export const createPortfolioProject = async (project: CreatePortfolioProject): P
   return response.data;
 };
 
+export const updatePortfolioProject = async (id: string, project: Partial<CreatePortfolioProject>): Promise<PortfolioProject> => {
+  const response = await axios.put<PortfolioProject>(`${API_BASE_URL}/${id}`, project, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.data;
+};
+
 export default portfolioApi;

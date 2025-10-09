@@ -8,7 +8,7 @@ import { Save, X } from 'lucide-react';
 import Tags from '../components/Tags';
 import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
-import { getPortfolioProjectById } from '../services/portfolioApi';
+import { getPortfolioProjectById, updatePortfolioProject } from '../services/portfolioApi';
 
 const Edit: FC = (): JSX.Element => {
     const navigate = useNavigate();
@@ -72,19 +72,22 @@ const Edit: FC = (): JSX.Element => {
 
         setIsSubmitting(true);
         try {
-            const updatedPostData = updatePost(id, {
+            const updatedProject = {
                 title,
-                content,
-                coverImage,
-                demoLink,
-                githubLink,
-                tags: selectedTags,
+                description: content,
+                imagen: coverImage,
                 published: isPublished,
-            });
-            console.log('Updated post:', updatedPostData);
-            navigate('/portfolio');
+                demo: demoLink,
+                github: githubLink,
+                tags: selectedTags,
+            };
+
+            const result = await updatePortfolioProject(id, updatedProject);
+            console.log('Updated project:', result);
+            navigate('/home');
         } catch (error) {
-            console.error('Error updating post:', error);
+            console.error('Error updating project:', error);
+            alert('Error al actualizar el proyecto');
         } finally {
             setIsSubmitting(false);
         }
