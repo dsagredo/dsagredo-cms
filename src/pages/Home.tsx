@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import { Post } from '../types';
 import { MESSAGES } from '../constants/messages';
-import { getPortfolioProjects, PortfolioProject } from '../services/portfolioApi';
+import { getPortfolioProjects, PortfolioProject, deletePortfolioProject } from '../services/portfolioApi';
 
 const Home: FC = (): JSX.Element => {
     const [projects, setProjects] = useState<PortfolioProject[]>([]);
@@ -26,9 +26,10 @@ const Home: FC = (): JSX.Element => {
         fetchProjects();
     }, []);
 
-    const handleDeletePost = (id: string): void => {
+    const handleDeletePost = async (id: string): Promise<void> => {
         if (window.confirm(MESSAGES.DELETE_CONFIRMATION)) {
             try {
+                await deletePortfolioProject(id);
                 setProjects(projects.filter(p => p._id !== id));
             } catch (error) {
                 console.error('Error deleting post:', error);
