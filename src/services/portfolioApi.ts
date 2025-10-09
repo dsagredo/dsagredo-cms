@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const API_BASE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-ms';
 const API_ADD_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-add-ms';
-const API_UPDATE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-edit-ms'
+const API_DELETE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-delete-ms';
+const API_UPDATE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-edit-ms';
 
 export interface PortfolioProject {
   _id: string;
@@ -67,6 +68,14 @@ export const updatePortfolioProject = async (id: string, project: Partial<Create
     },
   });
   return response.data;
+};
+
+export const deletePortfolioProject = async (id: string): Promise<void> => {
+  await axios.delete(`${API_DELETE_URL}/${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 };
 
 export default portfolioApi;
