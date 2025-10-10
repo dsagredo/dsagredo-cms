@@ -13,16 +13,6 @@ import { createProject } from '../api/projectAPI';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();
-  const notify = () => toast.success('🦄 Wow so easy!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                progress: undefined,
-                theme: "colored",
-              });
     const {
         title,
         setTitle,
@@ -88,7 +78,6 @@ const New: FC = (): JSX.Element => {
                 closeOnClick: true,
                 pauseOnHover: false,
                 draggable: false,
-                progress: undefined,
                 theme: "colored",
               });
             }
