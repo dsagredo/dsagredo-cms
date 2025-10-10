@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import { Post } from '../types';
 import { MESSAGES } from '../constants/messages';
-import { getProjects, PortfolioProject, deletePortfolioProject } from '../services/portfolioApi';
+import { getProjects, PortfolioProject, deleteProject } from '../services/portfolioApi';
 
 const Home: FC = (): JSX.Element => {
     const [projects, setProjects] = useState<PortfolioProject[]>([]);
