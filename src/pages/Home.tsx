@@ -29,7 +29,7 @@ const Home: FC = (): JSX.Element => {
     const handleDeletePost = async (id: string): Promise<void> => {
         if (window.confirm(MESSAGES.DELETE_CONFIRMATION)) {
             try {
-                await deletePortfolioProject(id);
+                await deleteProject(id);
                 setProjects(projects.filter(p => p._id !== id));
             } catch (error) {
                 console.error('Error deleting post:', error);
