@@ -13,6 +13,17 @@ import { createProject } from '../api/projectAPI';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();
+  const notify = () => toast.success('🦄 Wow so easy!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+              });
     const {
         title,
         setTitle,
@@ -56,16 +67,16 @@ const New: FC = (): JSX.Element => {
             if (status) {
               navigate('/home');
               toast.success('🦄 Wow so easy!', {
-position: "top-center",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: false,
-draggable: false,
-progress: undefined,
-theme: "colored",
-transition: Bounce,
-});
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+              });
             }
         } catch (error) {
             console.error('Error creating project:', error);
