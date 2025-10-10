@@ -53,9 +53,8 @@ const New: FC = (): JSX.Element => {
 
             const {status} = await createProject(newProject);
             if (status) {
-              
+              navigate('/home');
             }
-            navigate('/home');
         } catch (error) {
             console.error('Error creating project:', error);
             alert('Error al crear el proyecto');
