@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-ms';
-const API_ADD_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-add-ms';
-const API_DELETE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-delete-ms';
-const API_UPDATE_URL = 'https://dsagredo-ms-production.up.railway.app/portfolio-edit-ms';
+const API_BASE_URL = 'https://dsagredo-ms-production.up.railway.app/api/projects';
 
 export interface PortfolioProject {
   _id: string;
@@ -53,7 +50,7 @@ export const getProjectById = async (id: string): Promise<PortfolioProject> => {
 };
 
 export const createProject = async (project: CreatePortfolioProject): Promise<PortfolioProject> => {
-  const response = await axios.post<PortfolioProject>(API_ADD_URL, project, {
+  const response = await axios.post<PortfolioProject>(API_BASE_URL, project, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -62,7 +59,7 @@ export const createProject = async (project: CreatePortfolioProject): Promise<Po
 };
 
 export const updateProject = async (id: string, project: Partial<CreatePortfolioProject>): Promise<PortfolioProject> => {
-  const response = await axios.put<PortfolioProject>(`${API_UPDATE_URL}/${id}`, project, {
+  const response = await axios.put<PortfolioProject>(`${API_BASE_URL}/${id}`, project, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -71,7 +68,7 @@ export const updateProject = async (id: string, project: Partial<CreatePortfolio
 };
 
 export const deleteProject = async (id: string): Promise<void> => {
-  await axios.delete(`${API_DELETE_URL}/${id}`, {
+  await axios.delete(`${API_BASE_URL}/${id}`, {
     headers: {
       'Content-Type': 'application/json',
     },
