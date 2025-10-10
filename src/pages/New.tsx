@@ -8,7 +8,7 @@ import { getAllTags } from '../data/mockData';
 import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
 import Tags from '../components/Tags';
-import { createPortfolioProject } from '../services/portfolioApi';
+import { createProject } from '../services/portfolioApi';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();
@@ -51,7 +51,7 @@ const New: FC = (): JSX.Element => {
                 tags: selectedTags,
             };
 
-            const createdProject = await createPortfolioProject(newProject);
+            const createdProject = await createProject(newProject);
             console.log('Created project:', createdProject);
             navigate('/home');
         } catch (error) {
