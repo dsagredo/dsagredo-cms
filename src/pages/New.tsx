@@ -55,6 +55,17 @@ const New: FC = (): JSX.Element => {
             const {status} = await createProject(newProject);
             if (status) {
               navigate('/home');
+              toast.success('🦄 Wow so easy!', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: false,
+draggable: false,
+progress: undefined,
+theme: "colored",
+transition: Bounce,
+});
             }
         } catch (error) {
             console.error('Error creating project:', error);
