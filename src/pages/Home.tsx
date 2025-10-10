@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import { Post } from '../types';
 import { MESSAGES } from '../constants/messages';
-import { getPortfolioProjects, PortfolioProject, deletePortfolioProject } from '../services/portfolioApi';
+import { getProjects, PortfolioProject, deletePortfolioProject } from '../services/portfolioApi';
 
 const Home: FC = (): JSX.Element => {
     const [projects, setProjects] = useState<PortfolioProject[]>([]);
@@ -15,7 +15,7 @@ const Home: FC = (): JSX.Element => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const data = await getPortfolioProjects();
+                const data = await getProjects();
                 setProjects(data);
             } catch (error) {
                 console.error('Error fetching projects:', error);
