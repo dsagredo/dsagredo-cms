@@ -22,7 +22,6 @@ const New: FC = (): JSX.Element => {
                 draggable: false,
                 progress: undefined,
                 theme: "colored",
-                transition: Bounce,
               });
     const {
         title,
