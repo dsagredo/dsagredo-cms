@@ -8,7 +8,7 @@ import { getAllTags } from '../data/mockData';
 import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
 import Tags from '../components/Tags';
-import { createProject } from '../api/portfolioApi';
+import { createProject } from '../api/projectAPI';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();
