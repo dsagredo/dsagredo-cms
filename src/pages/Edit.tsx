@@ -8,7 +8,7 @@ import { Save, X } from 'lucide-react';
 import Tags from '../components/Tags';
 import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
-import { getProjectById, updateProject } from '../api/portfolioApi';
+import { getProjectById, updateProject } from '../api/projectAPI';
 
 const Edit: FC = (): JSX.Element => {
     const navigate = useNavigate();
