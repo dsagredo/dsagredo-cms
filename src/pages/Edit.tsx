@@ -8,7 +8,7 @@ import { Save, X } from 'lucide-react';
 import Tags from '../components/Tags';
 import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
-import { getPortfolioProjectById, updatePortfolioProject } from '../services/portfolioApi';
+import { getProjectById, updateProject } from '../services/portfolioApi';
 
 const Edit: FC = (): JSX.Element => {
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Edit: FC = (): JSX.Element => {
         const loadProject = async (): Promise<void> => {
             if (id) {
                 try {
-                    const project = await getPortfolioProjectById(id);
+                    const project = await getProjectById(id);
                     if (project) {
                         setFormData({
                             title: project.title,
@@ -81,7 +81,7 @@ const Edit: FC = (): JSX.Element => {
                 tags: selectedTags,
             };
 
-            const result = await updatePortfolioProject(id, updatedProject);
+            const result = await updateProject(id, updatedProject);
             console.log('Updated project:', result);
             navigate('/home');
         } catch (error) {
