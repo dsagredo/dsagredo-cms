@@ -10,7 +10,6 @@ import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
 import Tags from '../components/Tags';
 import { createProject } from '../api/projectAPI';
-import { X } from 'lucide-react';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();
