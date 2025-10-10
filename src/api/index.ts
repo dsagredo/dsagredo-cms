@@ -43,7 +43,7 @@ const projectUrl = axios.create({
 });
 
 export const getProjects = async (): Promise<PortfolioProject[]> => {
-  const response = await axios.get<PortfolioProject[]>('');
+  const response = await axios.get<PortfolioProject[]>(API_BASE_URL);
   return response.data;
 };
 
