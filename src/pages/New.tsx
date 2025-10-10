@@ -215,6 +215,7 @@ const New: FC = (): JSX.Element => {
                     </div>
                 </div>
             </div>
+          <ToastContainer closeButton={CustomCloseButton} />
         </div>
     );
 };
