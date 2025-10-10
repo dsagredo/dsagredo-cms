@@ -49,6 +49,7 @@ const New: FC = (): JSX.Element => {
       type="button"
       className="absolute top-4 right-4"
       onClick={() => {
+        navigate('/home');
         closeToast(true);
       }}
     >
@@ -80,7 +81,6 @@ const New: FC = (): JSX.Element => {
 
             const {status} = await createProject(newProject);
             if (status) {
-              navigate('/home');
               toast.success('🦄 Wow so easy!', {
                 position: "top-center",
                 autoClose: 5000,
@@ -90,7 +90,6 @@ const New: FC = (): JSX.Element => {
                 draggable: false,
                 progress: undefined,
                 theme: "colored",
-                transition: Bounce,
               });
             }
         } catch (error) {
