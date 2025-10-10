@@ -10,7 +10,7 @@ import Input from '../components/Input';
 import UploadImage from '../components/UploadImage';
 import Tags from '../components/Tags';
 import { createProject } from '../api/projectAPI';
-import { Trash } from 'lucide-react';
+import { X } from 'lucide-react';
 
 const New: FC = (): JSX.Element => {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const New: FC = (): JSX.Element => {
         closeToast(true);
       }}
     >
-      <Trash />
+      <X />
     </button>
   );
 };
