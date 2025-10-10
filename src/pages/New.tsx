@@ -51,8 +51,10 @@ const New: FC = (): JSX.Element => {
                 tags: selectedTags,
             };
 
-            const createdProject = await createProject(newProject);
-            console.log('Created project:', createdProject);
+            const {status} = await createProject(newProject);
+            if (status) {
+              
+            }
             navigate('/home');
         } catch (error) {
             console.error('Error creating project:', error);
