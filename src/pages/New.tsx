@@ -1,7 +1,7 @@
 import { ChangeEvent, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Save, X } from 'lucide-react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, CloseButtonProps } from 'react-toastify';
 import Button from '../components/Button';
 import { useForms } from '../hooks/useForms';
 import { useImageUpload } from '../hooks/useImageUpload';
@@ -42,6 +42,22 @@ const New: FC = (): JSX.Element => {
         isSubmitting,
         setIsSubmitting,
     } = useForms();
+
+  const CustomCloseButton = ({ closeToast }: CloseButtonProps) => {
+  return (
+    <button
+      aria-label="remove"
+      type="button"
+      className="absolute top-4 right-4"
+      onClick={() => {
+        closeToast(true);
+      }}
+    >
+      <Trash />
+    </button>
+  );
+};
+
 
     const { fileInputRef, isUploading, handleImageUpload, triggerUpload } =
         useImageUpload((url: string): void => setCoverImage(url));
