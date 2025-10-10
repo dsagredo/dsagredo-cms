@@ -69,9 +69,9 @@ const New: FC = (): JSX.Element => {
                 tags: selectedTags,
             };
 
-            const {status} = await createProject(newProject);
+            const {status, mensaje} = await createProject(newProject);
             if (status) {
-              toast.success('🦄 Wow so easy!', {
+              toast.success(mensaje, {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
