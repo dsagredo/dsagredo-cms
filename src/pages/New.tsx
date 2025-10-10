@@ -75,7 +75,7 @@ const New: FC = (): JSX.Element => {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
-                closeOnClick: true,
+                closeOnClick: false,
                 pauseOnHover: false,
                 draggable: false,
                 theme: "colored",
