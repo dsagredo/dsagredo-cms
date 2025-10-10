@@ -35,24 +35,24 @@ export interface CreatePortfolioProject {
   github: string;
 }
 
-const portfolioApi = axios.create({
+const projectUrl = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-export const getPortfolioProjects = async (): Promise<PortfolioProject[]> => {
+export const getProjects = async (): Promise<PortfolioProject[]> => {
   const response = await portfolioApi.get<PortfolioProject[]>('');
   return response.data;
 };
 
-export const getPortfolioProjectById = async (id: string): Promise<PortfolioProject> => {
+export const getProjectById = async (id: string): Promise<PortfolioProject> => {
   const response = await axios.get<PortfolioProject>(`${API_BASE_URL}/${id}`);
   return response.data;
 };
 
-export const createPortfolioProject = async (project: CreatePortfolioProject): Promise<PortfolioProject> => {
+export const createProject = async (project: CreatePortfolioProject): Promise<PortfolioProject> => {
   const response = await axios.post<PortfolioProject>(API_ADD_URL, project, {
     headers: {
       'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const createPortfolioProject = async (project: CreatePortfolioProject): P
   return response.data;
 };
 
-export const updatePortfolioProject = async (id: string, project: Partial<CreatePortfolioProject>): Promise<PortfolioProject> => {
+export const updateProject = async (id: string, project: Partial<CreatePortfolioProject>): Promise<PortfolioProject> => {
   const response = await axios.put<PortfolioProject>(`${API_UPDATE_URL}/${id}`, project, {
     headers: {
       'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const updatePortfolioProject = async (id: string, project: Partial<Create
   return response.data;
 };
 
-export const deletePortfolioProject = async (id: string): Promise<void> => {
+export const deleteProject = async (id: string): Promise<void> => {
   await axios.delete(`${API_DELETE_URL}/${id}`, {
     headers: {
       'Content-Type': 'application/json',
@@ -78,4 +78,4 @@ export const deletePortfolioProject = async (id: string): Promise<void> => {
   });
 };
 
-export default portfolioApi;
+export default projectUrl;
